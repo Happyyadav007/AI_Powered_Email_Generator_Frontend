@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API_BASE_URL from "../config";
 
 const EmailGenerator = () => {
     const [feedback, setFeedback] = useState("");
@@ -17,7 +18,7 @@ const EmailGenerator = () => {
     const generateEmail = async () => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:4000/api/v1/generate-email", {
+            const response = await fetch(`${API_BASE_URL}/generate-email`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ feedback }),
@@ -60,7 +61,7 @@ const EmailGenerator = () => {
         attachments: attachments,
     });
             try {
-                const response = await fetch("http://localhost:4000/api/v1/send-email", {
+                const response = await fetch(`${API_BASE_URL}/send-email`, {
                     method: "POST",
                     //headers: { "Content-Type": "application/json" },
                     //body: JSON.stringify({ email, subject, body }),
@@ -98,7 +99,7 @@ const EmailGenerator = () => {
             }
         
             try {
-                const response = await fetch("http://localhost:4000/api/v1/save-draft", {
+                const response = await fetch(`${API_BASE_URL}/save-draft`, {
                     method: "POST",
                     body: formData,
                 });
